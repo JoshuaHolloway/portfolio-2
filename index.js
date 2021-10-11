@@ -9,7 +9,21 @@ const server = express();
 // ==============================================
 // Register Middleware:
 
-server.use(express.json());
+server.use(express.json()); // parse request body as JSON
+
+// -Redirect to HTTPS version on Heroku when user
+//  enters URL as:
+//  AmazonTulsa.com
+// -Works without this if user explicity enters:
+//  https://www.AmazonTulsa.com
+// -Heroku article explaining how to
+//  "use https for all requests":
+//  https://help.heroku.com/J2R1S4T8/can-heroku-force-an-application-to-use-ssl-tls
+if (server.get('env') === 'production') {
+  const enforce = require('express-sslify');
+  server.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
+
 // -Root route serves the React app:
 //  (react router routes also need
 //   the catch-all endpoint!!!)

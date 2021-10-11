@@ -24,6 +24,11 @@ git push origin main
   --Default branch should be main and base project should be uploaded.
   --Aparenetly, the master branch is overwritten by main.
 
+-After first push above, make mod to codebase and do following once (standard push afterwards):
+git add .
+git commit -m "set remote as upstream"
+git push --set-upstream origin main
+
 =======================================
 -Configure ESLint:
 
@@ -124,11 +129,22 @@ fetch('http://localhost:9000/api/users').then(() => console.log('success')).catc
 -Point custom namecheap domain to the Heroku app: 
   --Namecheap article explaining process:
     -----https://www.namecheap.com/support/knowledgebase/article.aspx/9737/2208/pointing-a-domain-to-the-heroku-app/
-  --YouTube video explaining process:
-    ---https://youtu.be/0zb-FRAJFYE
-    ---Add custom domain at Heroku app
-      ----with www
-      ----without www
-    ---Get the DNS target
+    ---Add custom domain to Heroku app:
+      ----Heroku -> App: "portfolio----2" -> Settings -> Domains -> "Add domain":
+        ---AmazonTulsa.com
+        ---www.AmazonTulsa.com
+    ---Copy the DNS targets for each custom domain from previous step.
+      ----Paste into: NameCheap -> Domain List -> AmazonTulsa.com -> Manage -> 
+                      -> Advanced DNS -> Host Records:
+          -----CNAME Record:
+            ------Host: www
+            ------Value: <DNS target for www.AmazonTulsa.com>
+          -----ALIAS Record:
+            ------Host: @
+            ------value: <DNS target for AmazonTulsa.com>
     ---Update CNAME and ALIAS Record at namecheap
     ---SSL certificate for HTTPS connection
+
+
+
+    
