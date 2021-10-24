@@ -134,10 +134,17 @@ const App = () => {
         {quotes &&
           quotes.map((quote) => {
             return (
-              <li key={quote.quote_id}>
+              <li key={quote.quote_id} style={{ 'margin-top': '10px' }}>
                 <hr />
 
-                <div>
+                <div
+                  style={{
+                    minHeight: '100px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-evenly',
+                  }}
+                >
                   <p>
                     {/* const [quotes, setQuotes] = useState([]); const [newQuote, */}
                     {/* setNewQuote] = useState(''); const [attributedTo, */}
