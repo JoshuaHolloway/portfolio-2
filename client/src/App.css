@@ -10,8 +10,8 @@ body {
 }
 
 .App {
-  width: 90%;
-  background: hotpink;
-  padding: 5%;
+  width: 80vw;
+  /* background: hotpink; */
+  /* padding: 5%; */
   text-align: center;
 }
