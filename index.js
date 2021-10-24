@@ -46,21 +46,24 @@ if (process.env.NODE_ENV === 'development') {
 
 // ==============================================
 
-// -Our API-endpoings come earlier in the pipeline
 server.get('/api/hello', (req, res) => {
   res.json({ message: 'hello from backend!' });
 });
 
 // ==============================================
 
-server.get('/api/users', (req, res) => {
-  res.status(200).json([
-    { id: 0, name: 'josh', password: 'password 1' },
-    { id: 1, name: 'bosh', password: 'password 2' },
-  ]);
-});
+// server.get('/api/users', (req, res) => {
+//   res.status(200).json([
+//     { id: 0, name: 'josh', password: 'password 1' },
+//     { id: 1, name: 'bosh', password: 'password 2' },
+//   ]);
+// });
 
 // ==============================================
+
+// -Router(s):
+const apiRoutes = require('./api/api-routes');
+server.use('/api', apiRoutes);
 
 // ==============================================
 

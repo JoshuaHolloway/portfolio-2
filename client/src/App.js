@@ -24,25 +24,26 @@ const App = () => {
   // --------------------------------------------
 
   const [users, setUsers] = useState([]);
+  const [username, setUserName] = useState('');
 
   // --------------------------------------------
 
-  useEffect(() => {
-    fetch('http://localhost:9000/api/users')
-      .then(() => console.log('success'))
-      .catch(() => console.log('ERROR'));
-
-    fetch(`${process.env.REACT_APP_BACKEND}/users`)
-      .then((res) => res.json())
-      .then((users) => {
-        console.log('users: ', users);
-        setUsers(users);
-      })
-      .catch((err) => {
-        console.log('JOSH .catch()');
-        console.log('error: ', err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_BACKEND}/users`)
+  //     .then(() => console.log('success'))
+  //     .catch(() => console.log('ERROR'));
+  //
+  //   fetch(`${process.env.REACT_APP_BACKEND}/users`)
+  //     .then((res) => res.json())
+  //     .then((users) => {
+  //       console.log('users: ', users);
+  //       setUsers(users);
+  //     })
+  //     .catch((err) => {
+  //       console.log('JOSH .catch()');
+  //       console.log('error: ', err);
+  //     });
+  // }, []);
 
   // --------------------------------------------
 
@@ -56,20 +57,60 @@ const App = () => {
         <Comp2 />
       </Route>
 
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        onClick={() => {
+          console.log('get button clicked');
+          fetch(`${process.env.REACT_APP_BACKEND}/users`)
+            .then((res) => {
+              console.log('res: ', res);
+              return res.json();
+            })
+            .then((data) => {
+              console.log('data: ', data);
+            })
+            .catch(() => console.log('ERROR'));
+        }}
+      >
+        GET
+      </button>
+
+      <button
+        onClick={() => {
+          console.log('add button clicked');
+          // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_json_data
+          fetch(`${process.env.REACT_APP_BACKEND}/users`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: 'test', password: 'test' }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Success:', data);
+              // message.textContent = data.message;
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        }}
+      >
+        POST
+      </button>
+
+      <div>
+        <form>
+          <input
+            className='username'
+            type='text'
+            name='username'
+            placeholder='username'
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
+        </form>
+      </div>
 
       <ul>
         {users &&
