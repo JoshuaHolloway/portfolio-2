@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 // ==============================================
 
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 // ==============================================
@@ -63,37 +63,43 @@ const App = () => {
 
       <form>
         <label htmlFor='quote'>
-          Quote:
           <input
             id='quote-input'
             // name='quote-input'
             type='text'
             onChange={(e) => setNewQuote(e.target.value)}
             value={newQuote}
+            placeholder='quote'
           />
         </label>
 
+        <br />
+
         <label htmlFor='attributed-to-input'>
-          Attributed to:
           <input
             id='attributed-to'
             // name='attributed-to-input'
             type='text'
             onChange={(e) => setAttributedTo(e.target.value)}
             value={attributedTo}
+            placeholder='attributed to'
           />
         </label>
 
+        <br />
+
         <label htmlFor='submitted-by-input'>
-          Submitted by:
           <input
             id='submitted-by-input'
             // name='submitted-by-input'
             type='text'
             onChange={(e) => setSubmittedBy(e.target.value)}
             value={submittedBy}
+            placeholder='your name'
           />
         </label>
+
+        <br />
 
         <button
           type='submit'
@@ -124,11 +130,13 @@ const App = () => {
         </button>
       </form>
 
-      <ul>
+      <ul style={{ 'list-style': 'none' }}>
         {quotes &&
           quotes.map((quote) => {
             return (
               <li key={quote.quote_id}>
+                <hr />
+
                 <div>
                   <p>
                     {/* const [quotes, setQuotes] = useState([]); const [newQuote, */}
