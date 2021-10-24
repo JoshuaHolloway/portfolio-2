@@ -8,6 +8,8 @@ function getAllUsers() {
   return db('users');
 }
 
+// ==============================================
+
 function getAllQuotes() {
   return db('quotes');
 }
