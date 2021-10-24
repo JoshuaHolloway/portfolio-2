@@ -113,7 +113,7 @@ const App = () => {
               .then((response) => response.json())
               .then((data) => {
                 console.log('Success:', data);
-                // message.textContent = data.message;
+                setQuotes([...quotes, data]);
               })
               .catch((error) => {
                 console.error('Error:', error);
@@ -140,12 +140,12 @@ const App = () => {
 
                   <p>
                     <strong>Attributed to: </strong>
-                    {quote.attributed_to}
+                    {quote.attributed_to || 'Unknown'}
                   </p>
 
                   <p>
                     <strong>Submitted by: </strong>
-                    {quote.submitted_by}
+                    {quote.submitted_by || 'Anonymous'}
                   </p>
                 </div>
               </li>
