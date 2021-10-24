@@ -157,3 +157,5 @@ Postgres DB
    in package.json (/) to fix compatibility issue.
     --Determined via below in both / and /client:
        npm ls eslint
+  -Heroku post build script:
+    "heroku-postbuild": "cd client && npm i && npm run build"
