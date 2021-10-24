@@ -23,27 +23,31 @@ const Comp2 = () => {
 const App = () => {
   // --------------------------------------------
 
-  const [users, setUsers] = useState([]);
-  const [username, setUserName] = useState('');
+  const [quotes, setQuotes] = useState([]);
+  const [newQuote, setNewQuote] = useState('');
+  const [attributedTo, setAttributedTo] = useState('');
+  const [submittedBy, setSubmittedBy] = useState('');
 
   // --------------------------------------------
 
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_BACKEND}/users`)
-  //     .then(() => console.log('success'))
-  //     .catch(() => console.log('ERROR'));
-  //
-  //   fetch(`${process.env.REACT_APP_BACKEND}/users`)
-  //     .then((res) => res.json())
-  //     .then((users) => {
-  //       console.log('users: ', users);
-  //       setUsers(users);
-  //     })
-  //     .catch((err) => {
-  //       console.log('JOSH .catch()');
-  //       console.log('error: ', err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BACKEND}/quotes`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data: ', data);
+        setQuotes(data);
+      })
+      .catch((err) => {
+        console.log('JOSH .catch()');
+        console.log('error: ', err);
+      });
+  }, []);
+
+  // --------------------------------------------
+
+  useEffect(() => {
+    console.log('quotes: ', quotes);
+  }, [quotes]);
 
   // --------------------------------------------
 
@@ -57,75 +61,91 @@ const App = () => {
         <Comp2 />
       </Route>
 
-      <button
-        onClick={() => {
-          console.log('get button clicked');
-          fetch(`${process.env.REACT_APP_BACKEND}/users`)
-            .then((res) => {
-              console.log('res: ', res);
-              return res.json();
-            })
-            .then((data) => {
-              console.log('data: ', data);
-            })
-            .catch(() => console.log('ERROR'));
-        }}
-      >
-        GET
-      </button>
-
-      <button
-        onClick={() => {
-          console.log('add button clicked');
-          // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_json_data
-          fetch(`${process.env.REACT_APP_BACKEND}/users`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username: 'test', password: 'test' }),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('Success:', data);
-              // message.textContent = data.message;
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-            });
-        }}
-      >
-        POST
-      </button>
-
-      <div>
-        <form>
+      <form>
+        <label htmlFor='quote'>
+          Quote:
           <input
-            className='username'
+            id='quote-input'
+            // name='quote-input'
             type='text'
-            name='username'
-            placeholder='username'
-            onChange={(e) => {
-              setUserName(e.target.value);
-            }}
+            onChange={(e) => setNewQuote(e.target.value)}
+            value={newQuote}
           />
-        </form>
-      </div>
+        </label>
+
+        <label htmlFor='attributed-to-input'>
+          Attributed to:
+          <input
+            id='attributed-to'
+            // name='attributed-to-input'
+            type='text'
+            onChange={(e) => setAttributedTo(e.target.value)}
+            value={attributedTo}
+          />
+        </label>
+
+        <label htmlFor='submitted-by-input'>
+          Submitted by:
+          <input
+            id='submitted-by-input'
+            // name='submitted-by-input'
+            type='text'
+            onChange={(e) => setSubmittedBy(e.target.value)}
+            value={submittedBy}
+          />
+        </label>
+
+        <button
+          type='submit'
+          onClick={(e) => {
+            e.preventDefault();
+            fetch(`${process.env.REACT_APP_BACKEND}/quotes`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                quote: newQuote,
+                attributed_to: attributedTo,
+                submitted_by: submittedBy,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log('Success:', data);
+                // message.textContent = data.message;
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
+          }}
+        >
+          Submit Quote
+        </button>
+      </form>
 
       <ul>
-        {users &&
-          users.map((user) => {
+        {quotes &&
+          quotes.map((quote) => {
             return (
-              <li key={user.id}>
+              <li key={quote.quote_id}>
                 <div>
                   <p>
-                    <strong>User Name: </strong>
-                    {user.name}
+                    {/* const [quotes, setQuotes] = useState([]); const [newQuote, */}
+                    {/* setNewQuote] = useState(''); const [attributedTo, */}
+                    {/* setAttributedTo] = useState(''); const [submittedBy, */}
+                    {/* setSubmittedBy] = useState(''); */}
+                    <strong>Quote: </strong>"{quote.quote}"
                   </p>
 
                   <p>
-                    <strong>User Password: </strong>
-                    {user.password}
+                    <strong>Attributed to: </strong>
+                    {quote.attributed_to}
+                  </p>
+
+                  <p>
+                    <strong>Submitted by: </strong>
+                    {quote.submitted_by}
                   </p>
                 </div>
               </li>

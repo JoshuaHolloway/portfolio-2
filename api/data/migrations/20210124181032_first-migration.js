@@ -9,6 +9,8 @@ exports.up = async (knex) => {
     .createTable('quotes', (users) => {
       users.increments('quote_id');
       users.string('quote', 200).notNullable();
+      users.string('attributed_to', 200);
+      users.string('submitted_by', 200);
     });
 };
 

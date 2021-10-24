@@ -9,7 +9,7 @@ function getAllUsers() {
 }
 
 function getAllQuotes() {
-  return db('users');
+  return db('quotes');
 }
 
 // ==============================================
@@ -33,6 +33,8 @@ async function insertQuote(quote) {
   const [newQuoteObject] = await db('quotes').insert(quote, [
     'quote_id',
     'quote',
+    'attributed_to',
+    'submitted_by',
   ]);
   return newQuoteObject;
 }
@@ -71,7 +73,10 @@ router.post('/users', async (req, res) => {
 
 // [GET] /api/quotes
 router.get('/quotes', async (req, res) => {
-  res.status(201).json(await getAllQuotes());
+  const quotes = await getAllQuotes();
+  console.log('[GET] /api/qoutes -> quotes: ', quotes);
+
+  res.status(201).json(quotes);
 });
 
 // ==============================================
