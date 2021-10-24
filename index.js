@@ -6,10 +6,13 @@ const path = require('path');
 const express = require('express');
 const server = express();
 
+const helmet = require('helmet');
+
 // ==============================================
 // Register Middleware:
 
 server.use(express.json()); // parse request body as JSON
+server.use(helmet());
 
 // -Redirect to HTTPS version on Heroku when user
 //  enters URL as:
@@ -53,14 +56,18 @@ server.get('/api/hello', (req, res) => {
 
 // ==============================================
 
-server.get('/api/users', (req, res) => {
-  res.status(200).json([
-    { id: 0, name: 'josh', password: 'password 1' },
-    { id: 1, name: 'bosh', password: 'password 2' },
-  ]);
-});
+// server.get('/api/users', (req, res) => {
+//   res.status(200).json([
+//     { id: 0, name: 'josh', password: 'password 1' },
+//     { id: 1, name: 'bosh', password: 'password 2' },
+//   ]);
+// });
 
 // ==============================================
+
+// -Router(s):
+const apiRoutes = require('./api/api-routes');
+server.use('/api', apiRoutes);
 
 // ==============================================
 

@@ -145,6 +145,15 @@ fetch('http://localhost:9000/api/users').then(() => console.log('success')).catc
     ---Update CNAME and ALIAS Record at namecheap
     ---SSL certificate for HTTPS connection
 
-
-
-    
+=======================================
+Postgres DB
+  /knexfile.js (***)
+  /.env
+    -database_name
+  /package.json
+    -Heroku Web-App name
+  -Remove everything related to tests (compatibility issue with React install in /client and the babel-jest installed for /)
+  -Change eslint to "eslint": "7.32.0",
+   in package.json (/) to fix compatibility issue.
+    --Determined via below in both / and /client:
+       npm ls eslint

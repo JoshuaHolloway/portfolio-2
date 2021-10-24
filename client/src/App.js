@@ -28,7 +28,7 @@ const App = () => {
   // --------------------------------------------
 
   useEffect(() => {
-    fetch('http://localhost:9000/api/users')
+    fetch(`${process.env.REACT_APP_BACKEND}/users`)
       .then(() => console.log('success'))
       .catch(() => console.log('ERROR'));
 
@@ -55,6 +55,42 @@ const App = () => {
       <Route path='/2'>
         <Comp2 />
       </Route>
+
+      <h5>index.html :)</h5>
+
+      <p class='message'></p>
+
+      <button
+        className='button-get'
+        onClick={() => {
+          console.log('get button clicked');
+          fetch(`${process.env.REACT_APP_BACKEND}/josh`)
+            .then((res) => {
+              console.log('res: ', res);
+              return res.json();
+            })
+            .then((data) => {
+              console.log('data: ', data);
+            })
+            .catch(() => console.log('ERROR'));
+        }}
+      >
+        GET
+      </button>
+      <button class='button-post'>POST</button>
+
+      <div>
+        <form>
+          <input
+            class='username'
+            type='text'
+            name='username'
+            placeholder='username'
+          />
+          <input class='quote' type='text' name='quote' placeholder='quote' />
+        </form>
+        <button class='button-add-quote'>Add quote</button>
+      </div>
 
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
