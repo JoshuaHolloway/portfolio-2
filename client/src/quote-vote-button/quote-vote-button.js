@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-const QuoteCard = ({ quote, setQuotes, sort_votes }) => {
+const QuoteVoteButton = ({ quote, setQuotes, sort_votes }) => {
   // --------------------------------------------
 
   // -Store a reference to the SVG
@@ -93,4 +93,4 @@ const QuoteCard = ({ quote, setQuotes, sort_votes }) => {
 
 // ==============================================
 
-export default QuoteCard;
+export default QuoteVoteButton;
