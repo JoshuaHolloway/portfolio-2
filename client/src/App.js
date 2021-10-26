@@ -140,14 +140,14 @@ const App = () => {
 
       <div
         style={{
-          border: 'dashed darkorange 2px',
+          // border: 'dashed darkorange 2px',
           display: 'flex',
           justifyContent: 'center',
         }}
       >
         <div
           style={{
-            border: 'solid lightblue 2px',
+            // border: 'solid lightblue 2px',
             display: 'flex',
             justifyContent: 'space-evenly',
             width: '400px',
@@ -207,15 +207,15 @@ const App = () => {
 
                   <div
                     style={{
-                      border: 'solid hotpink 1px',
+                      // border: 'solid hotpink 1px',
                       display: 'flex',
                       justifyContent: 'space-evenly',
                     }}
                   >
                     <div
                       style={{
-                        border: 'solid deepskyblue 2px',
-                        width: '150px',
+                        // border: 'solid deepskyblue 2px',
+                        width: '120px',
                         display: 'flex',
                         justifyContent: 'space-evenly',
                         alignContent: 'center',
@@ -245,7 +245,7 @@ const App = () => {
 
                       <div
                         style={{
-                          border: 'dashed yellow 2px',
+                          // border: 'dashed yellow 2px',
                           display: 'flex',
                           alignItems: 'center',
                         }}
@@ -296,11 +296,21 @@ const App = () => {
 
                       <div
                         style={{
-                          // border: 'dashed yellow 2px',
+                          position: 'relative',
+                          // border: 'dashed purple 2px',
                           display: 'flex',
                           alignItems: 'center',
                         }}
                       >
+                        <div
+                          style={{
+                            position: 'absolute',
+                            height: '100%',
+                            width: '100%',
+                            background: 'rgba(255, 255, 255, 0.75)',
+                          }}
+                        ></div>
+
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           width='16'
@@ -318,13 +328,23 @@ const App = () => {
 
                     <div
                       style={{
-                        border: 'solid deepskyblue 2px',
-                        width: '150px',
+                        position: 'relative',
+                        // border: 'solid deepskyblue 2px',
+                        width: '125px',
                         display: 'flex',
                         justifyContent: 'space-evenly',
                         alignContent: 'center',
                       }}
                     >
+                      <div
+                        style={{
+                          position: 'absolute',
+                          height: '100%',
+                          width: '100%',
+                          background: 'rgba(255, 255, 255, 0.75)',
+                        }}
+                      ></div>
+
                       <div
                         style={{
                           // background: 'lightgray',
