@@ -11,8 +11,8 @@
     "seed": "knex seed:run",
     "migrateh": "heroku run knex migrate:latest -a portfolio----2",
     "rollbackh": "heroku run knex migrate:rollback -a portfolio----2",
-    "databaseh": "heroku pg:psql -a portfolio----2",
     "seedh": "heroku run knex seed:run -a portfolio----2",
+    "databaseh": "heroku pg:psql -a portfolio----2",
     "deploy": "git push heroku main",
     "heroku-postbuild": "cd client && npm i && npm run build"
   },

@@ -16,6 +16,17 @@ function getAllQuotes() {
 
 // ==============================================
 
+function update_vote(id, value) {
+  // knex('accounts')
+  //   .where('userid', '=', 1)
+  //   .increment('balance', 10)
+  // Outputs:
+  // update `accounts` set `balance` = `balance` + 10 where `userid` = 1
+  return db('quotes').where('quote_id', '=', id).increment('vote_up', value);
+}
+
+// ==============================================
+
 async function insertUser(user) {
   // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
   // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
@@ -37,6 +48,8 @@ async function insertQuote(quote) {
     'quote',
     'attributed_to',
     'submitted_by',
+    'vote_up',
+    'vote_down',
   ]);
   return newQuoteObject;
 }
@@ -87,8 +100,27 @@ router.get('/quotes', async (req, res) => {
 router.post('/quotes', async (req, res) => {
   console.log('[POST] /api/quotes -> req.body: ', req.body);
 
-  res.status(201).json(await insertQuote(req.body));
+  await insertQuote(req.body);
+  const all_quotes = await getAllQuotes();
+
+  res.status(201).json(all_quotes);
   // res.status(201).json({ message: 'HI!' });
+});
+
+// ==============================================
+
+// [PUT] /api/quotes
+router.put('/quotes/:id', async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    await update_vote(id, 1);
+    const table = await getAllQuotes();
+    console.log('table: ', table);
+    res.json(table);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // ==============================================
